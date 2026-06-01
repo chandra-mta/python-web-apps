@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap4
+from flask_bootstrap import Bootstrap5
 from .config import BaseConfig
 
 
@@ -12,25 +12,25 @@ from sqlalchemy.engine import Engine
 from sqlalchemy import event
 
 
-#@event.listens_for(Engine, "connect")
-#def set_sqlite_pragma(dbapi_connection, connection_record):
-#    cursor = dbapi_connection.cursor()
-#    cursor.execute("PRAGMA foreign_keys=ON")
-#    cursor.close()
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 
-#db = SQLAlchemy()
-#sess = Session()
-bootstrap = Bootstrap4()
+db = SQLAlchemy()
+sess = Session()
+bootstrap = Bootstrap5()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(BaseConfig)
 
     bootstrap.init_app(app)
-    #db.init_app(app)
-    #app.config['SESSION_SQLALCHEMY'] = db #: Must set the SQLAlchemy database for server-side session data after construction
-    #sess.init_app(app)
+    db.init_app(app)
+    app.config['SESSION_SQLALCHEMY'] = db #: Must set the SQLAlchemy database for server-side session data after construction
+    sess.init_app(app)
 
     #: Binds application instance to current CPU thread for using current_app and g proxies.
     # app.app_context().push()
