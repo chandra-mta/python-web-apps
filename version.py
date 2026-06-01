@@ -2,6 +2,14 @@ import sys, os
 from pprint import pformat
 
 def application(environ, start_response):
+    """
+    Simple WSGI application for python version info.
+
+    Note that the Python Flask library framework is built ontop of the WSGI
+    using the Werkzeug library to fit the WSGI specification.
+
+    Thus, this module's application is a simpler backend check.
+    """
     status = '200 OK'
 
     output = "Python version = {}\n".format(sys.version)
