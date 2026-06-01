@@ -1,0 +1,21 @@
+<!--This tests the cross origin cookie permissions from the backend server.-->
+<!-- Cookies settings of the front end application are implemented via Flask CORS-->
+
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="test()">Test Request</button>
+
+<script>
+function test() {
+  fetch("http://127.0.0.1:8443/", {
+    credentials: "include"
+  })
+  .then(res => res.text())
+  .then(console.log)
+  .catch(err => console.error(err));
+}
+</script>
+
+</body>
+</html>
