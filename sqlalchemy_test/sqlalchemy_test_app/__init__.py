@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap5
 from .config import BaseConfig
 
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 #
 # --- SQLAlchemy event handler to turn on Foreign Key Constraints for every engine connection.
@@ -40,5 +41,7 @@ def create_app():
     from .index import bp as index_bp
 
     app.register_blueprint(index_bp, url_prefix="/")
+
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_prefix=1)
 
     return app
