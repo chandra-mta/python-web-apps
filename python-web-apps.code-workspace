@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "../python-server-configs"
+		},
+		{
+			"path": "../flask-usint"
+		},
+		{
+			"path": "../codebase_topology"
 		}
 	],
 	"settings": {}
