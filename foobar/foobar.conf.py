@@ -1,0 +1,1 @@
+../../python-server-configs/foobar/foobar.conf.py
