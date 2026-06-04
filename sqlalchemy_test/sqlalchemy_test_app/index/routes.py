@@ -39,7 +39,7 @@ def index():
 
     return render_template("index.jinja", form=form)
 
-bp.route("/confirmation", methods=["GET", "POST"])
+@bp.route("/confirmation", methods=["GET", "POST"])
 def confirmation():
     """
     Use web_session to display a confirmation page of the intermediary data.
@@ -60,14 +60,14 @@ def confirmation():
         if form.confirm.data:
             #: The confirm button was pushed! perform the database operation
             new_entry= Score(
-                            id=web_session.id,
-                            name=web_session.name,
-                            value=web_session.value
+                            id=web_session['id'],
+                            name=web_session['name'],
+                            value=web_session['value']
                         )
             
             db.session.add(new_entry)
             db.session.commit()
-            redirect(url_for("index.submitted"))
+            return redirect(url_for("index.submitted"))
     
     return render_template("confirmation.jinja", form=form)
 
