@@ -15,4 +15,8 @@ def create_app():
 
     app.register_blueprint(index_bp, url_prefix="/")
 
+    from .pathing import bp as pathing_bp
+
+    app.register_blueprint(pathing_bp, url_prefix="/pathing")
+
     return app
