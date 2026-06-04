@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Confirmation page</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{form.previous_page()}}</br>
+            {{form.confirm()}}</br>
+        </p>
+        <p>
+            {{ session.id }}<br>
+        </p>
+        <p>
+            {{ session.name }}<br>
+        </p>
+        <p>
+            {{ session.value }}<br>
+        </p>
+    </form>
+{% endblock %}

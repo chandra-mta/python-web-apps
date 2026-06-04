@@ -1,8 +1,7 @@
 from flask import Flask
-from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
-from flask_bootstrap import Bootstrap5
 from .config import BaseConfig
+
+from .extensions import db, web_session_instance, bootstrap
 
 from werkzeug.middleware.proxy_fix import ProxyFix
 
@@ -19,11 +18,6 @@ def set_sqlite_pragma(dbapi_connection, connection_record):
     cursor.execute("PRAGMA foreign_keys=ON")
     cursor.close()
 
-
-db = SQLAlchemy()
-sess = Session()
-bootstrap = Bootstrap5()
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object(BaseConfig)
@@ -31,7 +25,7 @@ def create_app():
     bootstrap.init_app(app)
     db.init_app(app)
     app.config['SESSION_SQLALCHEMY'] = db #: Must set the SQLAlchemy database for server-side session data after construction
-    sess.init_app(app)
+    web_session_instance.init_app(app)
 
     #: Binds application instance to current CPU thread for using current_app and g proxies.
     # app.app_context().push()
