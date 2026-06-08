@@ -6,7 +6,7 @@ from logging.handlers import RotatingFileHandler
 def build_rotating_handler(path, level):
     handler = RotatingFileHandler(
         path,
-        maxBytes=1 * 1024, # 2kb
+        maxBytes=10 * 1024, # 10kb
         backupCount=7
     )
 
